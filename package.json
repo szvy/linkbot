@@ -1,0 +1,14 @@
+{
+  "name": "linkbot",
+  "version": "1.0.0",
+  "description": "discord bot that generates links from json file",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "szvy",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^14.16.3"
+  }
+}
