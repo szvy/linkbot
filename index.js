@@ -7,7 +7,7 @@
 const { Client, GatewayIntentBits, Partials, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, Events } = require('discord.js');
 const fs = require('fs');
 
-const jason1 = JSON.parse(fs.readFileSync('./put-a-json-file-name-here.json', 'utf8'));
+const jason1 = JSON.parse(fs.readFileSync('./put-a-json-file-name-here.json', 'utf8')); // put how many different types of links you want (for example: fastly, freedns, wildcards, etc.)
 const jason2 = JSON.parse(fs.readFileSync('./put-a-json-file-name-here.json', 'utf8'));
 const jason3 = JSON.parse(fs.readFileSync('./put-a-json-file-name-here.json', 'utf8'));
 const jason4 = JSON.parse(fs.readFileSync('./put-a-json-file-name-here.json', 'utf8'));
