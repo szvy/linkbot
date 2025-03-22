@@ -17,7 +17,7 @@ const client = new Client({
   partials: [Partials.Channel]
 });
 
-const OWNER_ID = 'put your discord id here';
+const OWNER_ID = 'put your discord id here'; // put your user id here
 const MAX_USES_PER_DAY = 2; // max amount of times each button can be used
 const usageData = {};
 
@@ -42,13 +42,13 @@ client.on(Events.MessageCreate, async (message) => {
   
   if (message.content.trim() === '--panel' && message.author.id === OWNER_ID) {
     const embed = new EmbedBuilder()
-      .setTitle('Link Generator')
-      .setDescription('click a button below to generate a link!!')
-      .setColor('DarkerGrey');
+      .setTitle('Link Generator') // embed title
+      .setDescription('click a button below to generate a link!!') // embed description
+      .setColor('DarkerGrey'); // color
       .setFooter({ text: 'bot by szvy - discord.gg/szvy' });
     const row = new ActionRowBuilder()
       .addComponents(
-        new ButtonBuilder().setCustomId('genjason1').setLabel('link type 1').setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setCustomId('genjason1').setLabel('link type 1').setStyle(ButtonStyle.Secondary), // buttons
         new ButtonBuilder().setCustomId('genjason2').setLabel('link type 2').setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId('genjason3').setLabel('link type 3').setStyle(ButtonStyle.Secondary),
         new ButtonBuilder().setCustomId('genjason4').setLabel('link type 4').setStyle(ButtonStyle.Secondary),
@@ -64,12 +64,12 @@ client.on(Events.InteractionCreate, async (interaction) => {
   const { user, customId } = interaction;
   checkAndResetUsage(user.id, customId);
   if (usageData[user.id][customId].count >= MAX_USES_PER_DAY) {
-    return interaction.reply({ content: 'youve reached your daily usage for this type of link! try another type or wait until tomorrow for 2 more!', ephemeral: true });
+    return interaction.reply({ content: 'youve reached your daily usage for this type of link! try another type or wait until tomorrow for 2 more!', ephemeral: true }); // message if you use too many
   }
 
   usageData[user.id][customId].count += 1;
 
-  let chosenLinks;
+  let chosenLinks; // sets what links it chooses per button you click
   switch (customId) {
     case 'genjason1':
       chosenLinks = jason1;
@@ -84,18 +84,18 @@ client.on(Events.InteractionCreate, async (interaction) => {
       chosenLinks = jason4;
       break;
     default:
-      return interaction.reply({ content: 'idk what button you pressed', ephemeral: true });
+      return interaction.reply({ content: 'idk what button you pressed', ephemeral: true }); // message if theres an unkown button
   }
 
   const randomLink = chosenLinks[Math.floor(Math.random() * chosenLinks.length)];
 
   try {
-    await user.send(`here is your link! ${randomLink}`);
-    await interaction.reply({ content: 'check your DMs for your link! :D', ephemeral: true });
+    await user.send(`here is your link! ${randomLink}`); // message it dms to your user
+    await interaction.reply({ content: 'check your DMs for your link! :D', ephemeral: true }); // what it sends to your user (not in dms)
   } catch (error) {
     usageData[user.id][customId].count -= 1;
-    await interaction.reply({ content: 'yo dms are off or some shit idk man', ephemeral: true });
+    await interaction.reply({ content: 'yo dms are off or some shit idk man', ephemeral: true }); // message if it cant dm the user
   }
 });
 
-client.login('put your discord bot token here');
+client.login('put your discord bot token here'); // put your discord bot token here
